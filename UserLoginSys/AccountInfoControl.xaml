@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="UserLoginSys.AccountInfoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:UserLoginSys"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Account Information" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+        <Grid Grid.Column="0">
+            <Label Content="User Name" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top"/>
+            <Label Content="Display Name" HorizontalAlignment="Right" Margin="0,60,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TextBox Text="{Binding Path=SelectedUser.UserName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Width="120" IsReadOnly="True"/>
+            <TextBox Text="{Binding Path=SelectedUser.DisplayName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0" Width="120" IsReadOnly="True"/>
+        </Grid>
+        <CheckBox Content="Is Locked Out" IsChecked="{Binding Path=SelectedUser.IsLockOut}" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,90,0,0" IsEnabled="False"/>
+    </Grid>
+</UserControl>

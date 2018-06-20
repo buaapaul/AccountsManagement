@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserAccounts>
+  <UserAccount>
+    <UserName>paul_zhang</UserName>
+    <DisplayName>Paul</DisplayName>
+    <PasswordHash>gXfn9vzTcXc=</PasswordHash>
+    <UserRole>SuperAdmin</UserRole>
+    <IsLockOut>False</IsLockOut>
+    <ExpirationDate>2018-07-20</ExpirationDate>
+  </UserAccount>
+  <UserAccount>
+    <UserName>lisa_isailovic</UserName>
+    <DisplayName>Lisa</DisplayName>
+    <PasswordHash></PasswordHash>
+    <UserRole>Admin</UserRole>
+    <IsLockOut>False</IsLockOut>
+    <ExpirationDate>2018-07-20</ExpirationDate>
+  </UserAccount>
+  <UserAccount>
+    <UserName>edd_ly</UserName>
+    <DisplayName>Edd</DisplayName>
+    <PasswordHash></PasswordHash>
+    <UserRole>Manager</UserRole>
+    <IsLockOut>False</IsLockOut>
+    <ExpirationDate>2018-07-20</ExpirationDate>
+  </UserAccount>
+  <UserAccount>
+    <UserName>joy_detorres</UserName>
+    <DisplayName>Joy</DisplayName>
+    <PasswordHash></PasswordHash>
+    <UserRole>Standard</UserRole>
+    <IsLockOut>True</IsLockOut>
+    <ExpirationDate>2018-07-20</ExpirationDate>
+  </UserAccount>
+</UserAccounts>
