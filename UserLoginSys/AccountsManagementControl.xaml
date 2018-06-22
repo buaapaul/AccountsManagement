@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:UserLoginSys"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="800">
+             d:DesignHeight="200" d:DesignWidth="500">
+    <UserControl.Resources>
+        <local:UserRoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -18,13 +21,18 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="User Name" Binding="{Binding UserName}"/>
                     <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}"/>
-                    <DataGridCheckBoxColumn Header="Is Locked Out" Binding="{Binding IsLockOut}"/>
-                    <DataGridTextColumn Header="Password expiration date" Binding="{Binding ExpirationDate}"/>
+                    <DataGridTextColumn Header="User Role" Binding="{Binding UserRole}"/>
+                    <DataGridTextColumn Header="Bad Attempts" Binding="{Binding LockOutCount}"/>
+                    <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid>
-                <Button x:Name="_CreateBtn" Content="Create user" HorizontalAlignment="Center" Margin="0,10,200,0" VerticalAlignment="Top" Width="75"/>
-                <Button x:Name="_DeleteBtn" Content="Delete user" HorizontalAlignment="Center" Margin="200,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="_DeleteBtn_Click"/>
+                <Button x:Name="_CreateBtn" Content="Create" HorizontalAlignment="Center" Margin="0,10,200,0" VerticalAlignment="Top" Width="75" Click="_CreateBtn_Click"/>
+                <Button x:Name="_EditBtn" Content="Edit" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="75"
+                        Click="_EditBtn_Click"/>
+                <Button x:Name="_DeleteBtn" Content="Delete" HorizontalAlignment="Center" Margin="200,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"
+                        Click="_DeleteBtn_Click"
+                        Visibility="{Binding Path=LoginUser, Converter={StaticResource RoleToVisibilityConverter}, ConverterParameter=SuperAdmin}"/>
             </Grid>
         </StackPanel>
     </Grid>

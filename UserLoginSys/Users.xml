@@ -5,31 +5,31 @@
     <DisplayName>Paul</DisplayName>
     <PasswordHash>gXfn9vzTcXc=</PasswordHash>
     <UserRole>SuperAdmin</UserRole>
-    <IsLockOut>False</IsLockOut>
+    <LockoutCount>0</LockoutCount>
     <ExpirationDate>2018-07-20</ExpirationDate>
   </UserAccount>
   <UserAccount>
     <UserName>lisa_isailovic</UserName>
     <DisplayName>Lisa</DisplayName>
-    <PasswordHash></PasswordHash>
+    <PasswordHash>gXfn9vzTcXc=</PasswordHash>
     <UserRole>Admin</UserRole>
-    <IsLockOut>False</IsLockOut>
+    <LockoutCount>0</LockoutCount>
     <ExpirationDate>2018-07-20</ExpirationDate>
   </UserAccount>
   <UserAccount>
     <UserName>edd_ly</UserName>
     <DisplayName>Edd</DisplayName>
-    <PasswordHash></PasswordHash>
+    <PasswordHash>gXfn9vzTcXc=</PasswordHash>
     <UserRole>Manager</UserRole>
-    <IsLockOut>False</IsLockOut>
+    <LockoutCount>0</LockoutCount>
     <ExpirationDate>2018-07-20</ExpirationDate>
   </UserAccount>
   <UserAccount>
     <UserName>joy_detorres</UserName>
     <DisplayName>Joy</DisplayName>
-    <PasswordHash></PasswordHash>
+    <PasswordHash>gXfn9vzTcXc=</PasswordHash>
     <UserRole>Standard</UserRole>
-    <IsLockOut>True</IsLockOut>
+    <LockoutCount>10</LockoutCount>
     <ExpirationDate>2018-07-20</ExpirationDate>
   </UserAccount>
 </UserAccounts>

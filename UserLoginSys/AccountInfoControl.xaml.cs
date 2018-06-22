@@ -23,5 +23,12 @@ namespace UserLoginSys
         {
             InitializeComponent();
         }
+
+        private void _ChangePwdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePwdWindow changePwdWindow = new ChangePwdWindow();
+            changePwdWindow.DataContext = Workspace.This;
+            changePwdWindow.ShowDialog();
+        }
     }
 }

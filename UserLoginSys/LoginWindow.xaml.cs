@@ -45,32 +45,45 @@ namespace UserLoginSys
             for (; i < Workspace.This.Users.Count; i++)
             {
                 user = Workspace.This.Users[i];
-                if (user.UserName == _NameBox.Text && user.PasswordHash == enteredPasswordHash)
+                if(string.Equals(user.UserName,_NameBox.Text, StringComparison.OrdinalIgnoreCase))
                 {
-                    break;
+                    if (user.LockOutCount >= 5)
+                    {
+                        MessageBox.Show("You are locked out because of too many bad attempts, please contact the administrators for help!");
+                        return;
+                    }
+                    if (user.VerifyPassword(_PwdBox.Password))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Incorrect password!");
+                        AccountsManagement.SaveToFile(Workspace.This.Users, Workspace.This.UserFilePath);
+                        return;
+                    }
                 }
             }
             if (i >= Workspace.This.Users.Count)
             {
-                MessageBox.Show("Wrong user name or password");
+                MessageBox.Show("Invalid user name!");
                 return;
             }
+            AccountsManagement.SaveToFile(Workspace.This.Users, Workspace.This.UserFilePath);
             Workspace.This.LoginUser = Workspace.This.Users[i];
             this.DialogResult = true;
             this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            string userFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users.xml");
-            if (!File.Exists(userFilePath))
+        {            
+            if (!File.Exists(Workspace.This.UserFilePath))
             {
                 MessageBox.Show("Error finding users information file");
                 return;
             }
-            Workspace.This.Users = AccountsManagement.LoadFromFile(userFilePath);
-            var test = AccountsManagement.DeleteAccount(Workspace.This.Users, Workspace.This.Users[2]);
-            AccountsManagement.SaveToFile(Workspace.This.Users, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "haha.xml"));
+            Workspace.This.Users = AccountsManagement.LoadFromFile(Workspace.This.UserFilePath);
+            Keyboard.Focus(this._NameBox);
         }
 
         private void _PwdBox_KeyDown(object sender, KeyEventArgs e)

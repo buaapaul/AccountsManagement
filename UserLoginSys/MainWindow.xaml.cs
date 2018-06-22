@@ -21,6 +21,8 @@ namespace UserLoginSys
     {
         public MainWindow()
         {
+            AccountActivityLog log = new AccountActivityLog();
+            log.LogActivity("paul_zhang", Activities.CreateAccount, "Create Lisa");
             InitializeComponent();
             DataContext = Workspace.This;
             Workspace.This.Owner = this;
@@ -45,7 +47,10 @@ namespace UserLoginSys
             {
                 this.Close();
             }
-            this.Visibility = Visibility.Visible;
+            else
+            {
+                this.Visibility = Visibility.Visible;
+            }
         }
     }
 }

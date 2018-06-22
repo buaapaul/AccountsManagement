@@ -1,0 +1,40 @@
+﻿<Window x:Class="UserLoginSys.EditAccountWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserLoginSys"
+        mc:Ignorable="d"
+        Title="Edit Account" Height="150" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Label Content="User Name:" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Path=SelectedUser.UserName}" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Label Content="Bad Attempts:" VerticalAlignment="Center"/>
+            <Label Content="{Binding SelectedUser.LockOutCount}" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Label Content="New Password" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"/>
+        <Label Content="New Password Confirm" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right"/>
+
+        <PasswordBox x:Name="_NewPwdBox" Grid.Row="1" Grid.Column="1" Width="150" Height="25" HorizontalAlignment="Left"/>
+        <PasswordBox x:Name="_NewPwdConfirmBox" Grid.Row="2" Grid.Column="1" Width="150" Height="25" HorizontalAlignment="Left"/>
+
+        <Button x:Name="_ResetLockoutBtn" Content="Reset Lockout" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="_ResetLockoutBtn_Click"/>
+        <Button x:Name="_ChangeBtn" Content="Change Password" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="_ChangeBtn_Click"/>
+        <Button x:Name="_ResetPwdBtn" Content="Reset Password" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Click="_ResetPwdBtn_Click"/>
+    </Grid>
+</Window>

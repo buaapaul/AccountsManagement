@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
@@ -23,40 +22,45 @@ namespace UserLoginSys
                 ObservableCollection<User> users = new ObservableCollection<User>();
                 XElement elements = XElement.Load(filePath);
                 XNode node = elements.FirstNode;
+                string userName, displayName, passwordHash;
+                int lockoutCount;
+                UserRoles role;
+                DateTime expiration;
                 while (node != null)
                 {
-                    User user = new User();
                     XElement subElement = node.XPathSelectElement("UserName");
-                    user.UserName = subElement.Value;
+                    userName = subElement.Value;
                     subElement = node.XPathSelectElement("DisplayName");
-                    user.DisplayName = subElement.Value;
+                    displayName = subElement.Value;
                     subElement = node.XPathSelectElement("PasswordHash");
-                    user.PasswordHash = subElement.Value;
+                    passwordHash = subElement.Value;
                     subElement = node.XPathSelectElement("UserRole");
                     if (subElement.Value == "SuperAdmin")
                     {
-                        user.UserRole = UserRoles.SuperAdmin;
+                        role = UserRoles.SuperAdmin;
                     }
                     else if (subElement.Value == "Admin")
                     {
-                        user.UserRole = UserRoles.Admin;
+                        role = UserRoles.Admin;
                     }
                     else if (subElement.Value == "Manager")
                     {
-                        user.UserRole = UserRoles.Manager;
+                        role = UserRoles.Manager;
                     }
                     else if (subElement.Value == "Standard")
                     {
-                        user.UserRole = UserRoles.Standard;
+                        role = UserRoles.Standard;
                     }
-                    subElement = node.XPathSelectElement("IsLockOut");
-                    user.IsLockOut = Convert.ToBoolean(subElement.Value);
-                    subElement = node.XPathSelectElement("ExpirationDate");
-                    if (subElement.Value != string.Empty)
+                    else
                     {
-                        user.ExpirationDate = Convert.ToDateTime(subElement.Value);
+                        role = UserRoles.Standard;
                     }
+                    subElement = node.XPathSelectElement("LockoutCount");
+                    lockoutCount = Convert.ToInt32(subElement.Value);
+                    subElement = node.XPathSelectElement("ExpirationDate");
+                    expiration = Convert.ToDateTime(subElement.Value);
 
+                    User user = new User(userName, displayName, passwordHash, role, lockoutCount, expiration);
                     users.Add(user);
                     node = node.NextNode;
                 }
@@ -69,7 +73,7 @@ namespace UserLoginSys
         }
         public static bool SaveToFile(ObservableCollection<User> users, string filePath)
         {
-            if(users==null || filePath == null)
+            if (users == null || filePath == null)
             {
                 return false;
             }
@@ -84,8 +88,8 @@ namespace UserLoginSys
                         new XElement("DisplayName", users[i].DisplayName),
                         new XElement("PasswordHash", users[i].PasswordHash),
                         new XElement("UserRole", users[i].UserRole),
-                        new XElement("IsLockOut", users[i].IsLockOut.ToString()),
-                        new XElement("ExpirationDate", string.Format("{0:yyyy-MM-dd}", users[0].ExpirationDate))
+                        new XElement("LockoutCount", users[i].LockOutCount.ToString()),
+                        new XElement("ExpirationDate", string.Format("{0:yyyy-MM-dd}", users[i].ExpirationDate))
                         );
                     root.Add(account);
                 }
@@ -97,24 +101,6 @@ namespace UserLoginSys
                 return false;
             }
         }
-        public static ObservableCollection<User> DeleteAccount(ObservableCollection<User> users, User userTobeDeleted)
-        {
-            ObservableCollection<User> newUsers = new ObservableCollection<User>();
-            if (users.Contains(userTobeDeleted))
-            {
-                users.Remove(userTobeDeleted);
-            }
-            newUsers = users;
-            return newUsers;
-        }
-        public static ObservableCollection<User> AddAccount(ObservableCollection<User> users, User userTobeAdded)
-        {
-            if (users == null)
-            {
-                return null;
-            }
-            users.Add(userTobeAdded);
-            return users;
-        }
+
     }
 }

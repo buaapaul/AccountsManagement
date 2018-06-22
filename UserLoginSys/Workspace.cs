@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -23,6 +24,11 @@ namespace UserLoginSys
         #endregion Constructor
 
         #region Public Properties
+        public string UserFilePath { get; private set; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users.xml");
+        public bool IsDeleteUserAllowed
+        {
+            get { return LoginUser?.UserRole == UserRoles.SuperAdmin; }
+        }
         public User LoginUser
         {
             get { return _LoginUser; }
@@ -32,6 +38,7 @@ namespace UserLoginSys
                 {
                     _LoginUser = value;
                     RaisePropertyChanged("LoginUser");
+                    RaisePropertyChanged("IsDeleteUserAllowed");
                 }
             }
         }

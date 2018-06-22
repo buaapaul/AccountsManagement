@@ -7,19 +7,29 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="400">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Account Information" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-        <Grid Grid.Column="0">
-            <Label Content="User Name" HorizontalAlignment="Right" Margin="0,35,0,0" VerticalAlignment="Top"/>
-            <Label Content="Display Name" HorizontalAlignment="Right" Margin="0,60,0,0" VerticalAlignment="Top"/>
-        </Grid>
-        <Grid Grid.Column="1">
-            <TextBox Text="{Binding Path=SelectedUser.UserName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,35,0,0" Width="120" IsReadOnly="True"/>
-            <TextBox Text="{Binding Path=SelectedUser.DisplayName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,60,0,0" Width="120" IsReadOnly="True"/>
-        </Grid>
-        <CheckBox Content="Is Locked Out" IsChecked="{Binding Path=SelectedUser.IsLockOut}" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="100,90,0,0" IsEnabled="False"/>
+        <Label Content="Account Information" FontSize="20" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
+        <Label Content="User Name:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Display Name:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="User Role:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Content="Passowrd Expiration Date:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+        <TextBlock Text="{Binding Path=LoginUser.UserName}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="{Binding Path=LoginUser.DisplayName}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="{Binding Path=LoginUser.UserRole}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBlock Text="{Binding Path=LoginUser.ExpirationDate}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+        <Button x:Name="_ChangePwdBtn" Grid.Row="5" Grid.Column="1" Content="Change Password" VerticalAlignment="Center" HorizontalAlignment="Left" Click="_ChangePwdBtn_Click"/>
     </Grid>
 </UserControl>

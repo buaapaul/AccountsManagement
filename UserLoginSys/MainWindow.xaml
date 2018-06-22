@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserLoginSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="800" Width="1280" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:UserRoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -14,18 +17,21 @@
         <Grid Grid.Row="0">
             <Label Content="Hello," HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
             <Label Content="{Binding Path=LoginUser.DisplayName}" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="_LogoutBtn" Content="Log out" HorizontalAlignment="Left" Margin="707,2,0,0" VerticalAlignment="Top" Width="75" Click="_LogoutBtn_Click"/>
+            <Button x:Name="_LogoutBtn" Content="Log out" HorizontalAlignment="Right" Margin="0,2,10,0" VerticalAlignment="Top" Width="75" Click="_LogoutBtn_Click"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200*"/>
                 <ColumnDefinition Width="300*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <local:AccountInfoControl/>
+                <StackPanel Orientation="Vertical">
+                    <local:AccountInfoControl/>
+                    <local:AccountsManagementControl HorizontalAlignment="Center" Margin="0,50,0,0"
+                    Visibility="{Binding Path=LoginUser, Converter={StaticResource RoleToVisibilityConverter},ConverterParameter=Admin}" />
+                </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <local:AccountsManagementControl HorizontalAlignment="Center" Margin="10,0,10,0"/>
             </Grid>
         </Grid>
 

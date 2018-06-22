@@ -35,8 +35,33 @@ namespace UserLoginSys
             {
                 return;
             }
-            Workspace.This.Users = AccountsManagement.DeleteAccount(Workspace.This.Users, Workspace.This.SelectedUser);
-            AccountsManagement.SaveToFile(Workspace.This.Users, AppDomain.CurrentDomain.BaseDirectory + "haha.xml");
+            Workspace.This.Users.Remove(Workspace.This.SelectedUser);
+            AccountsManagement.SaveToFile(Workspace.This.Users, Workspace.This.UserFilePath);
+        }
+
+        private void _CreateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CreateAccountWindow createAccountWindow = new CreateAccountWindow();
+            CreateAccountViewModel viewModel = new CreateAccountViewModel(Workspace.This.LoginUser.UserRole);
+            createAccountWindow.DataContext = viewModel;
+            createAccountWindow.ShowDialog();
+        }
+
+        private void _EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (Workspace.This.SelectedUser == null)
+            {
+                MessageBox.Show("Please select a user account first");
+                return;
+            }
+            if (Workspace.This.SelectedUser.UserRole <= Workspace.This.LoginUser.UserRole)
+            {
+                MessageBox.Show("Sorry, You cannot edit " + Workspace.This.SelectedUser.UserRole.ToString());
+                return;
+            }
+            EditAccountWindow editAccountWindow = new EditAccountWindow();
+            editAccountWindow.DataContext = Workspace.This;
+            editAccountWindow.ShowDialog();
         }
     }
 }
