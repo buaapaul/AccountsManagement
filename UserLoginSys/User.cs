@@ -12,6 +12,7 @@ namespace UserLoginSys
         Manager = 2,
         Standard = 3,
     }
+    [Serializable]
     public class User
     {
         //public int Position { get; set; }

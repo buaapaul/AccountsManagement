@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -38,6 +39,11 @@ namespace UserLoginSys
             }
             Workspace.This.LoginUser.ChangePassword(_NewPwdBox.Password);
             AccountsManagement.SaveToFile(Workspace.This.Users, Workspace.This.UserFilePath);
+            User selectedUser = Workspace.This.SelectedUser;
+            ObservableCollection<User> users = Workspace.This.Users;
+            Workspace.This.Users = null;
+            Workspace.This.Users = users;
+            Workspace.This.SelectedUser = selectedUser;
             this.Close();
         }
     }

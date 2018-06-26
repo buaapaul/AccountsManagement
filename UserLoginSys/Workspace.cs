@@ -24,7 +24,7 @@ namespace UserLoginSys
         #endregion Constructor
 
         #region Public Properties
-        public string UserFilePath { get; private set; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Users.xml");
+        public string UserFilePath { get; private set; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Accounts.dat");
         public bool IsDeleteUserAllowed
         {
             get { return LoginUser?.UserRole == UserRoles.SuperAdmin; }

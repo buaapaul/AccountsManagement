@@ -21,7 +21,7 @@ namespace UserLoginSys
     {
         public MainWindow()
         {
-            AccountActivityLog log = new AccountActivityLog();
+            ActivityLogManagement log = new ActivityLogManagement("paul_zhang");
             log.LogActivity("paul_zhang", Activities.CreateAccount, "Create Lisa");
             InitializeComponent();
             DataContext = Workspace.This;

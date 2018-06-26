@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UserLoginSys"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1280" WindowStartupLocation="CenterScreen">
+        Title="Accounts management system" Height="800" Width="1280" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <local:UserRoleToVisibilityConverter x:Key="RoleToVisibilityConverter"/>
     </Window.Resources>
@@ -32,6 +32,8 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">
+                <local:AccountsActivityLogControl HorizontalAlignment="Center"
+                                        Visibility="{Binding Path=LoginUser, Converter={StaticResource RoleToVisibilityConverter},ConverterParameter=Admin}" />
             </Grid>
         </Grid>
 

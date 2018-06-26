@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -8,11 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Xml.Linq;
-using System.Xml.XPath;
-//using System.Windows.Shapes;
 
 namespace UserLoginSys
 {
@@ -76,14 +70,26 @@ namespace UserLoginSys
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {            
-            if (!File.Exists(Workspace.This.UserFilePath))
+        {
+            try
             {
-                MessageBox.Show("Error finding users information file");
-                return;
+                Workspace.This.Users = AccountsManagement.LoadFromFile(Workspace.This.UserFilePath);
+                Keyboard.Focus(this._NameBox);
             }
-            Workspace.This.Users = AccountsManagement.LoadFromFile(Workspace.This.UserFilePath);
-            Keyboard.Focus(this._NameBox);
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("Accounts data missed! contact administrators to setup the software!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
+            catch (System.Runtime.Serialization.SerializationException)
+            {
+                MessageBox.Show("Accounts data are damaged, please contact administrators!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void _PwdBox_KeyDown(object sender, KeyEventArgs e)

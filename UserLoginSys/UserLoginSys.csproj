@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hywire.Security">
+      <HintPath>libs\Hywire.Security.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -52,9 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AccountActivityLog.cs" />
+    <Compile Include="ActivityLogManagement.cs" />
     <Compile Include="AccountInfoControl.xaml.cs">
       <DependentUpon>AccountInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AccountsActivityLogControl.xaml.cs">
+      <DependentUpon>AccountsActivityLogControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AccountsManagement.cs" />
     <Compile Include="AccountsManagementControl.xaml.cs">
@@ -76,6 +82,10 @@
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="Workspace.cs" />
     <Page Include="AccountInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AccountsActivityLogControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,15 +149,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Users.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UserLogs.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Accounts.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
